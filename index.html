@@ -259,7 +259,7 @@
           Your Result
         </p>
         <div class="score-circle">
-          <p class="white-text final-score">76</p>
+          <p class="white-text final-score" id="finalScore"></p>
           <p class="grey-text">of 100</p>
         </div>
         <p class="grey-text description">
@@ -272,26 +272,29 @@
       <div class="summary-container">
         <span class="slate-text heading">Summary</span>
         <div class="scores">
-          <div class="score-container reaction">
-            <div class="left-side"><span class="icon"><img src="./assets/images/icon-reaction.svg"
-                  width="20"></span><span class="subject-name">Reaction</span></div>
-            <div class="right-side"><span class="slate-text">80 </span><span class="total-score"> / 100</span></div>
+          <div class="score-container">
+            <div class="left-side"><span class="icon"><img alt="subject-icon" class="subject-icon"
+                  width="20"></span><span class="subject-name"></span></div>
+            <div class="right-side"><span class="slate-text subject-marks"> </span><span class="total-score"> /
+                100</span></div>
           </div>
-
-          <div class="score-container memory">
-            <div class="left-side"><span class="icon"><img src="./assets/images/icon-memory.svg" width="20"></span><span
-                class="subject-name">Memory</span></div>
-            <div class="right-side"><span class="slate-text">92 </span><span class="total-score"> / 100</span></div>
+          <div class="score-container">
+            <div class="left-side"><span class="icon"><img alt="subject-icon" class="subject-icon"
+                  width="20"></span><span class="subject-name"></span></div>
+            <div class="right-side"><span class="slate-text subject-marks"> </span><span class="total-score"> /
+                100</span></div>
           </div>
-          <div class="score-container verbal">
-            <div class="left-side"><span class="icon"><img src="./assets/images/icon-verbal.svg" width="20"></span><span
-                class="subject-name">Verbal</span></div>
-            <div class="right-side"><span class="slate-text">61 </span><span class="total-score"> / 100</span></div>
+          <div class="score-container">
+            <div class="left-side"><span class="icon"><img alt="subject-icon" class="subject-icon"
+                  width="20"></span><span class="subject-name"></span></div>
+            <div class="right-side"><span class="slate-text subject-marks"> </span><span class="total-score"> /
+                100</span></div>
           </div>
-          <div class="score-container visual">
-            <div class="left-side"><span class="icon"><img src="./assets/images/icon-visual.svg" width="20"></span><span
-                class="subject-name">Visual</span></div>
-            <div class="right-side"><span class="slate-text">72 </span><span class="total-score"> / 100</span></div>
+          <div class="score-container">
+            <div class="left-side"><span class="icon"><img alt="subject-icon" class="subject-icon"
+                  width="20"></span><span class="subject-name"></span></div>
+            <div class="right-side"><span class="slate-text subject-marks"> </span><span class="total-score"> /
+                100</span></div>
           </div>
         </div>
         <button type="button">Continue</button>
@@ -300,6 +303,25 @@
   </section>
 </body>
 <script>
-  
-  </script>
+  var results = [];
+  var scoreContainers = document.getElementsByClassName('score-container');
+  var scores = document.getElementsByClassName('subject-marks');
+  var icons = document.getElementsByClassName('subject-icon');
+  var names = document.getElementsByClassName('subject-name');
+  var average = 0;
+  fetch('./data.json').then((response) => response.json()).then((json) => {
+    results = json
+    for (let index = 0; index < results.length; index++) {
+      const element = results[index];
+      scores[index].innerHTML = element['score'];
+      icons[index].src = element['icon'];
+      names[index].innerHTML = element['category'];
+      scoreContainers[index].classList.add(element['category'].toLowerCase());
+      average += element['score'];
+    }
+    average = average / results.length;
+    document.getElementById('finalScore').innerHTML = parseInt(average);
+  });
+</script>
+
 </html>
