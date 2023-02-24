@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Results summary component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @font-face {
+      font-family: 'HankenGrotesk';
+      src: url('./assets/fonts/HankenGrotesk-VariableFont_wght.ttf');
+    }
+
+    body {
+      margin: 0;
+      font-family: 'HankenGrotesk';
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+    }
+
+    .main-container {
+      display: flex;
+      width: 700px;
+      overflow: hidden;
+      border-radius: 2rem;
+      box-shadow: 0 0 40px lightgray;
+      height: 500px;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    .average-container,
+    .summary-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 2rem;
+    }
+
+    .average-container {
+      background: linear-gradient(180deg, hsl(252, 100%, 67%), hsl(241, 81%, 54%));
+      border-radius: 2rem;
+      align-items: center;
+    }
+
+    button {
+      background: hsl(224, 30%, 27%);
+      color: white;
+      padding: 1rem;
+      font-family: 'HankenGrotesk';
+      border: none;
+      border-radius: 5rem;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 1.5rem;
+    }
+
+    button:hover {
+      background: linear-gradient(180deg, hsl(252, 100%, 67%), hsl(241, 81%, 54%));
+    }
+
+    .white-text {
+      color: white;
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    .grey-text {
+      color: hsla(221, 100%, 96%, 0.7);
+    }
+
+    .score-circle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(180deg, hsla(256, 72%, 46%, 1), hsla(241, 72%, 46%, 0));
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .final-score {
+      font-size: 64px;
+    }
+
+    .slate-text {
+      color: hsl(224, 30%, 27%);
+      font-weight: 700;
+    }
+
+    .score-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      /* box-shadow: 1px 1px 0 gray; */
+      width: 250px;
+    }
+
+    .subject-name {
+      margin-left: 2rem;
+    }
+
+    .total-score {
+      color: grey;
+    }
+
+    .reaction {
+      background: hsla(0, 100%, 67%, 0.1);
+    }
+
+    .reaction .subject-name {
+      color: hsla(0, 100%, 67%, 1);
+    }
+
+    .memory {
+      background: hsla(39, 100%, 56%, 0.1);
+    }
+
+    .memory .subject-name {
+      color: hsla(39, 100%, 56%, 1);
+    }
+
+    .verbal {
+      background: hsla(166, 100%, 37%, 0.1);
+    }
+
+    .verbal .subject-name {
+      color: hsla(166, 100%, 37%, 1);
+    }
+
+    .visual {
+      background: hsla(234, 85%, 45%, 0.1);
+    }
+
+    .visual .subject-name {
+      color: hsla(234, 85%, 45%, 1);
+    }
+
+    .heading {
+      font-size: 24px;
+    }
+
+    .icon {
+      /* display: flex;
+      align-items: center; */
+      position: relative;
+    }
+
+    .icon img {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .description {
+      margin: 0 1rem;
+    }
+
+    .description span {
+      margin-bottom: 1rem;
+      font-size: 32px;
+      display: block;
+    }
+
+    .scores {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    @media screen and (max-width:767px) {
+      body {
+        font-size: 16px;
+      }
+
+      .main-container {
+        flex-direction: column;
+        min-height: 100vh;
+        border-radius: 0 0 1rem 1rem;
+        gap: 0rem;
+      }
+
+      .average-container {
+        border-radius: 0 0 2rem 2rem;
+        height: 300px;
+      }
+
+      .score-circle {
+        width: 150px;
+        height: 150px;
+        margin: 1rem 0;
+      }
+
+      .score-container {
+        width: 90%;
+      }
+
+      .heading {
+        font-size: 20px;
+      }
+
+      .description span {
+        margin-bottom: 0.5rem;
+        font-size: 24px;
+      }
+
+      .final-score {
+        font-size: 56px;
+      }
+
+      .scores {
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="main-container">
+      <div class="average-container">
+        <p class="grey-text heading">
+          Your Result
+        </p>
+        <div class="score-circle">
+          <p class="white-text final-score">76</p>
+          <p class="grey-text">of 100</p>
+        </div>
+        <p class="grey-text description">
+          <span class="white-text">
+            Great
+          </span>
+          You scored higher than 65% of the people who have taken these tests.
+        </p>
+      </div>
+      <div class="summary-container">
+        <span class="slate-text heading">Summary</span>
+        <div class="scores">
+          <div class="score-container reaction">
+            <div class="left-side"><span class="icon"><img src="./assets/images/icon-reaction.svg"
+                  width="20"></span><span class="subject-name">Reaction</span></div>
+            <div class="right-side"><span class="slate-text">80 </span><span class="total-score"> / 100</span></div>
+          </div>
+
+          <div class="score-container memory">
+            <div class="left-side"><span class="icon"><img src="./assets/images/icon-memory.svg" width="20"></span><span
+                class="subject-name">Memory</span></div>
+            <div class="right-side"><span class="slate-text">92 </span><span class="total-score"> / 100</span></div>
+          </div>
+          <div class="score-container verbal">
+            <div class="left-side"><span class="icon"><img src="./assets/images/icon-verbal.svg" width="20"></span><span
+                class="subject-name">Verbal</span></div>
+            <div class="right-side"><span class="slate-text">61 </span><span class="total-score"> / 100</span></div>
+          </div>
+          <div class="score-container visual">
+            <div class="left-side"><span class="icon"><img src="./assets/images/icon-visual.svg" width="20"></span><span
+                class="subject-name">Visual</span></div>
+            <div class="right-side"><span class="slate-text">72 </span><span class="total-score"> / 100</span></div>
+          </div>
+        </div>
+        <button type="button">Continue</button>
+      </div>
+    </div>
+  </section>
+</body>
+<script>
+  
+  </script>
+</html>
